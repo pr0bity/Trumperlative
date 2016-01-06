@@ -1,5 +1,8 @@
 # Trump superlative generator
+
 import random
+from flask import Flask, request, url_for
+
 
 #---- Clauses ----#
 
@@ -27,34 +30,51 @@ b = [["I'd ", "I would ", "We will ", "I'll ", "We'll ", "We are going to "],
 # Closing
 conclusion = [ " I'll show you!", "", " And yes, it is my hair.", "", " It's high-priority.", " I'm very proud of it."]
 
-
 #------------------#
 
-TrumpLative = ""
+app = Flask(__name__)
+app.secret_key = 'This is really unique and secret'
 
-# Use a Trump opener
-TrumpLative = TrumpLative + random.choice(intro)
+@app.route('/')
+def main_page():
+    return """
+        <p>TRUMP SUPERLATIVE GENERATOR</p>
+        <form method="POST" action="%s">
+		<button type="submit"> The Donald says...</button>
+		</form>
+        """ % (url_for('generate_ism'),)
 
-# Flip a coin
-if(random.randrange(1)):# Go with what Trump is
-	TrumpLative = TrumpLative + random.choice(a0)
-	
-	# Flip another coin
-	if (random.randrange(1)):
-		for line in range(2):
-			TrumpLative = TrumpLative + random.choice(a1[line])
-	else:
-		for line in range(3):
-			TrumpLative = TrumpLative + random.choice(a2[line])
-	
-	
-else:	# Go with what Trump will do
-	for line in range(4):
-		TrumpLative = TrumpLative + random.choice(b[line])
+@app.route('/trumperlative', methods=['POST'])
+def generate_ism():
+	TrumpLative = ""
 
-# Wrap it up
-TrumpLative = TrumpLative + random.choice(conclusion)
+	# Use a Trump opener
+	TrumpLative = TrumpLative + random.choice(intro)
 
-# Display results
-print(TrumpLative)
+	# Flip a coin
+	if(random.randrange(1)):# Go with what Trump is
+		TrumpLative = TrumpLative + random.choice(a0)
 	
+		# Flip another coin
+		if (random.randrange(1)):
+			for line in range(2):
+				TrumpLative = TrumpLative + random.choice(a1[line])
+		else:
+			for line in range(3):
+				TrumpLative = TrumpLative + random.choice(a2[line])
+	
+	
+	else:	# Go with what Trump will do
+		for line in range(4):
+			TrumpLative = TrumpLative + random.choice(b[line])
+
+	# Wrap it up
+	TrumpLative = TrumpLative + random.choice(conclusion)
+	 
+	return """ <p>%s</p> """ % (TrumpLative, url_for('main_page'))
+
+
+
+
+
+
