@@ -25,10 +25,10 @@ b = [["I'd ", "I would ", "we will ", "I'll ", "we'll ", "we are going to "],
 		["so hard, ", "so much, ", "so easily, " , "with strength and stamina -- ", "with so much energy, ", "so fabulously," ],
 		["your head would spin. ", "it will make a grand statement. ", "it will be unrivaled. " , "it'll be a home run! " , "it will be iconic. " ,"and that is 100 percent true. "]]
 
-# Route c:
+# Route c: in progress
 #c = [["You know who cheats at golf? ", "I greatly respect ", "I'm very proud of ", "One of my best friends is ", "I'm not a fan of "
 # Closing
-conclusion = [ "I'll show you!", "", "And yes, it is my hair.", "", "It's high-priority.", " I'm very proud of it."]
+conclusion = [ "I'll show you!", "", "And yes, it is my hair.", "", "It's high-priority.", " I'm very proud of it.", "", "", ""]
 
 #------------------#
 
@@ -39,22 +39,19 @@ TrumpLative = ""
 TrumpLative = TrumpLative + random.choice(intro)
 
 # Pick a route
-route = random.randrange(1)
+route = random.randrange(2)
+
 if(route == 0):# Go with what Trump is
 	TrumpLative = TrumpLative + random.choice(a0)
 
 	# Flip another coin
-	coin = random.randrange(1)
+	coin = random.randrange(2)
 	if (coin == 0):
 		for line in range(2):
 			TrumpLative = TrumpLative + random.choice(a1[line])
 	else:
 		for line in range(3):
 			TrumpLative = TrumpLative + random.choice(a2[line])
-
-#else if(route == 1):
-#	for line in range(2):
-#		TrumpLative = TrumpLative + 
 
 else:	# Go with what Trump will do
 	for line in range(4):
@@ -64,6 +61,7 @@ else:	# Go with what Trump will do
 TrumpLative = TrumpLative + random.choice(conclusion)
 
 print(TrumpLative)
+return(TrumperLative)
  
 
 
